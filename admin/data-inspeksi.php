@@ -29,8 +29,10 @@
         <?php
           $no   = 1;
           $pt   = $_SESSION['nama'];
+          $tang = date('d/m/Y');
           if ($pt == "Admin") {
-          $data = mysqli_query($connect, "SELECT * FROM `inspeksi` ORDER BY `no` DESC ");
+                    $data = mysqli_query($connect, "SELECT * FROM `inspeksi` ORDER BY `no` DESC ");
+          // $data = mysqli_query($connect, "SELECT * FROM `inspeksi` WHERE `tanggal` = '$tang' ORDER BY `no` DESC ");
           } else {
           $data = mysqli_query($connect, "SELECT * FROM `inspeksi` WHERE `uk_pihak` = '$pt' ORDER BY `no` DESC ");
           }
@@ -42,7 +44,7 @@
             <?php echo $no;$no++; ?>
           </div> -->
           <div class="col-6">
-            <font style="padding-left:10px;" data-toggle="modal" data-target="#nama<?php echo $row[0]; ?>"><?php echo $row[5]; ?></font>
+            <ANY style="padding-left:10px;" data-toggle="modal" data-target="#nama<?php echo $row[0]; ?>"><?php echo $row[5]; ?></ANY>
             <!-- Modal -->
             <div class="modal fade" id="nama<?php echo $row[0]; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog" role="document">
@@ -116,6 +118,29 @@
                                     $ket      = json_decode($inspeksi[12]);
                                     for ($i=0; $i < count($temuan); $i++) {
                                   ?>
+
+                                  <!-- Modal Gambar -->
+                                  <!-- <div class="modal fade" id="gambar" tabindex="-1" role="dialog" aria-labelledby="gambar" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="exampleModalLabel">Detail Gambar</h5>
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                          </button>
+                                        </div>
+                                        <div class="modal-body">
+                                          ...
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                          <button type="button" class="btn btn-primary">Save changes</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div> -->
+                                  <!-- Tutup Modal -->
+
                                 <div class="swiper-slide">
                                   <table>
                                     <tr>
@@ -141,7 +166,7 @@
                                     <tr>
                                       <td style="vertical-align:top;">Bukti Tindak Lanjut</td>
                                       <td style="vertical-align:top;">:</td>
-                                      <td style="vertical-align:top;"><a href="<?php echo $bukti[$i]; ?>">Lihat</a></td>
+                                      <td style="vertical-align:top;"><a href="proses/<?php echo $bukti[$i]; ?>">Lihat</a></td>
                                     </tr>
                                     <!-- <tr>
                                       <td style="vertical-align:top;">Keterangan </td>
@@ -176,7 +201,7 @@
             </div>
           </div>
           <div class="col-4">
-            <?php echo date('d/m/Y'); ?>
+            <?php echo $row[2]; ?>
           </div>
           <div class="col-2">
             <?php

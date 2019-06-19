@@ -77,21 +77,21 @@
                                <div class="col-md-12">
                                  <div class="form-group">
                                    <label for="temuan" style="width:100%">Unsafe Condition
-                                     <input style="width:92%" type="text" name="temuanb[<?php echo $i; ?>]" id="temuan" value="<?php echo $_SESSION['ttb'.$i]; ?>" class="form-control">
+                                     <input style="width:92%;" type="text" name="temuanb[<?php echo $i; ?>]" id="temuan" value="<?php echo $_SESSION['ttb'.$i]; ?>" class="form-control">
                                    </label>
                                  </div>
                                </div>
                                <div class="col-md-12">
                                  <div class="form-group">
                                    <label for="pb" style="width:100%">Potensi Bahaya
-                                     <input style="width:92%" type="text" name="potensib[<?php echo $i; ?>]" id="pb" class="form-control">
+                                     <textarea style="width:92%;height:100px;" type="text" name="potensib[<?php echo $i; ?>]" id="pb" class="form-control"></textarea>
                                    </label>
                                  </div>
                                </div>
                                <div class="col-md-12">
                                  <div class="form-group">
                                    <label for="tindak" style="width:100%">Tindak Lanjut
-                                     <input style="width:92%" type="text" name="tindakb[<?php echo $i; ?>]" id="tindak" class="form-control">
+                                     <textarea style="width:92%;height:100px;" type="text" name="tindakb[<?php echo $i; ?>]" id="tindak" class="form-control"></textarea>
                                    </label>
                                  </div>
                                </div>
@@ -131,14 +131,14 @@
                                 <div class="col-md-12">
                                   <div class="form-group">
                                     <label for="pb" style="width:100%">Potensi Bahaya
-                                      <input style="width:92%" type="text" name="potensic[<?php echo $i; ?>]" id="pb" value="" class="form-control">
+                                      <textarea style="width:92%;height:100px;" type="text" name="potensic[<?php echo $i; ?>]" id="pb" value="" class="form-control"></textarea>
                                     </label>
                                   </div>
                                 </div>
                                 <div class="col-md-12">
                                   <div class="form-group">
                                     <label for="tindak" style="width:100%">Tindak Lanjut
-                                      <input style="width:92%" type="text" name="tindakc[<?php echo $i; ?>]" id="tindak" value="" class="form-control">
+                                      <textarea style="width:92%;height:100px;" type="text" name="tindakc[<?php echo $i; ?>]" id="tindak" value="" class="form-control"></textarea>
                                     </label>
                                   </div>
                                 </div>

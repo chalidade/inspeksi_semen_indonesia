@@ -93,40 +93,36 @@ echo "<script>window.location = '../temuan.php';</script>";
   $target_dir  = "upload/";
   $filea       = $_FILES["filea"]["name"];
   for ($i=1; $i <= count($filea); $i++) {
-    $target_file = $target_dir . basename($filea[$i]);
-    $file[]      =  $target_file;
-  }
+        $filea       = $_FILES["filea"]["name"][$i];
+        $target_file = $target_dir . basename($filea);
+        $file[]      =  $target_file;
+        $tmp[]       =  $_FILES["filea"]["tmp_name"][$i];
+      }
 
-  $fileb       = $_FILES["fileb"]["name"];
-  for ($i=1; $i <= count($fileb); $i++) {
-    $target_file = $target_dir . basename($fileb[$i]);
-    $file[]      =  $target_file;
-  }
+      $fileb       = $_FILES["fileb"]["name"];
+      for ($i=1; $i <= count($fileb); $i++) {
+        $fileb       = $_FILES["fileb"]["name"][$i];
+        $target_file = $target_dir . basename($fileb);
+        $file[]      = $target_file;
+        $tmp[]       = $_FILES["fileb"]["tmp_name"][$i];
+      }
 
-  $filec       = $_FILES["filec"]["name"];
-  for ($i=1; $i <= count($filec); $i++) {
-    $target_file = $target_dir . basename($filec[$i]);
-    $file[]      =  $target_file;
-  }
+      $filec       = $_FILES["filec"]["name"];
+      for ($i=1; $i <= count($filec); $i++) {
+        $filec       = $_FILES["filec"]["name"][$i];
+        $target_file = $target_dir . basename($filec);
+        $file[]      =  $target_file;
+        $tmp[]       =  $_FILES["filec"]["tmp_name"][$i];
+      }
 
-  // Target File
-  // echo $file[$i];
 
-  // $uploadOk = 1;
-  // // $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-  // // echo $imageFileType;
-  // // Check if $uploadOk is set to 0 by an error
-  //
-  // if ($uploadOk == 0) {
-  //     echo "Sorry, your file was not uploaded.";
-  //     // if everything is ok, try to upload file
-  // } else {
-  //     if (move_uploaded_file($_FILES["filea"]["tmp_name"], $target_file)) {
-  //         echo "The file ". basename( $_FILES["filea"]["name"]). " has been uploaded.";
-  //     } else {
-  //         echo "Sorry, there was an error uploading your file.";
-  //     }
-  // }
+      for ($i=0; $i < count($file); $i++) {
+        if (move_uploaded_file($tmp[$i], $file[$i])) {
+          // echo "The file ". basename( $tmp[$i]). " has been uploaded. <br>";
+        } else {
+          // echo "Sorry, there was an error uploading your file.";
+        }
+      }
 
   $temuanb    = $_POST['temuanb'];
   $potensib   = $_POST['potensib'];
@@ -174,11 +170,11 @@ echo "<script>window.location = '../temuan.php';</script>";
     $b = json_encode($tindakan);
     $c = json_encode($tempo);
     $d = json_encode($temuan);
+    $e = json_encode($file);
 
 
-
-    $data = mysqli_query($connect,"UPDATE `inspeksi` SET `temuan` = '$d', `potensi_bahaya` = '$a', `tindak_lanjut` = '$b', `batas_tindak_lanjut` = '$c' WHERE `inspeksi`.`id` = '$idinspeksi';");
-    // echo "<script>alert('Data Disimpan');window.location = '../index.php';</script>";
+    $data = mysqli_query($connect,"UPDATE `inspeksi` SET `temuan` = '$d', `potensi_bahaya` = '$a', `tindak_lanjut` = '$b', `batas_tindak_lanjut` = '$c', `bukti_tindak_lanjut` = '$e' WHERE `inspeksi`.`id` = '$idinspeksi';");
+    echo "<script>alert('Data Disimpan');window.location = '../index.php';</script>";
 } else if($page == 'acc') {
   $id     = $_REQUEST['id'];
   $status = mysqli_query($connect, "UPDATE `inspeksi` SET `status` = '1' WHERE `inspeksi`.`id` = '$id';");
@@ -192,7 +188,6 @@ echo "<script>window.location = '../temuan.php';</script>";
   $status = mysqli_query($connect, "DELETE FROM `inspeksi` WHERE `inspeksi`.`id` = '$id'");
   echo "<script>window.location = '../data-inspeksi.php?id=harian';</script>";
 }
-
 
 
  ?>
