@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 14, 2019 at 08:30 PM
+-- Generation Time: Jun 19, 2019 at 10:18 PM
 -- Server version: 5.7.26-0ubuntu0.16.04.1
 -- PHP Version: 7.0.33-6+ubuntu16.04.1+deb.sury.org+3
 
@@ -75,7 +75,9 @@ CREATE TABLE `aktivitas_bulanan` (
 
 INSERT INTO `aktivitas_bulanan` (`id`, `program`, `jumlah`, `uraian`, `tanggal`, `id_bulanan`) VALUES
 (1, '["Pelatihan","Pengelasan"]', '["10","10"]', '["Tes","tes"]', '["2019-10-02","2019-02-01"]', '28052019789'),
-(2, '["testing","testing2"]', '["100","20"]', '["kegiatan","kegiatan saja"]', '["1995-09-11","2019-02-01"]', '0706201912');
+(2, '["testing","testing2"]', '["100","20"]', '["kegiatan","kegiatan saja"]', '["1995-09-11","2019-02-01"]', '0706201912'),
+(3, '["Testing","Tesla"]', '["100","20"]', '["Kegiatan","Kegiatan terbaik"]', '["2019-10-10","2010-11-01"]', '19062019101'),
+(4, '["1"]', '["10"]', '["1"]', '["2019-10-10"]', '19062019119');
 
 -- --------------------------------------------------------
 
@@ -109,8 +111,31 @@ CREATE TABLE `bulanan` (
 --
 
 INSERT INTO `bulanan` (`no`, `id`, `dokumen`, `kontraktor`, `periode`, `tenaga_kerja`, `jam_kerja_normal`, `jam_kerja_overtime`, `hari_kerja`, `nearmiss`, `incident`, `accident_ringan`, `accident_berat`, `accident_fatal`, `kerusakan_property`, `hilang_hari_kerja`, `biaya_pengobatan`, `id_program_k3`) VALUES
+(4, '19062019101', '99282718', 'PT Tunas', '2019', '["10","10","20"]', '["13","2","10"]', '["2","13","13"]', '["3","12","12"]', '["12","3","4"]', '["1","1566","13"]', '["13","1","21"]', '["12","4","24"]', '["1","26","1"]', '20000', '20', '250000', '19062019101'),
+(3, '19062019233', '12334451', 'PT Tuna Asmara', '2019', '', '', '', '', '', '', '', '', '', '150000', '10', '100000', '19062019233'),
 (1, '28052019789', '12122010192', 'CV Tuna Asmara', '1', '["0","0","10"]', '["0","0","10"]', '["0","0","13"]', '["10","12","10"]', '["5","5","5"]', '["10","7","7"]', '["198","81","8"]', '["818","81","8"]', '["1","12","10"]', '15000', '10', '100000', '28052019789'),
 (2, '706201912', '221133221231', 'Chalid', '2019', '', '', '', '', '', '', '', '', '', '15000', '10', '130000', '0706201912');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `closing_inspeksi`
+--
+
+CREATE TABLE `closing_inspeksi` (
+  `no` int(11) NOT NULL,
+  `id_inspeksi` varchar(25) NOT NULL,
+  `tanggal` varchar(10) NOT NULL,
+  `foto_closing` varchar(1000) NOT NULL,
+  `status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `closing_inspeksi`
+--
+
+INSERT INTO `closing_inspeksi` (`no`, `id_inspeksi`, `tanggal`, `foto_closing`, `status`) VALUES
+(2, '19062019266', '19/06/2019', '["upload/Screenshot from 2019-06-17 16-18-25.png","upload/Screenshot from 2019-05-22 15-59-22.png","upload/Screenshot from 2019-05-28 21-51-20.png","upload/"]', 1);
 
 -- --------------------------------------------------------
 
@@ -191,7 +216,11 @@ INSERT INTO `history` (`id`, `tanggal`, `aktivitas`, `id_aktivitas`) VALUES
 (18, '13-06-2019 09:13:40pm', 'harian', '13062019854'),
 (19, '13-06-2019 10:32:20pm', 'harian', '13062019644'),
 (20, '13-06-2019 10:38:43pm', 'Mingguan', '13062019226'),
-(21, '13-06-2019 10:39:06pm', 'Mingguan', '13062019598');
+(21, '13-06-2019 10:39:06pm', 'Mingguan', '13062019598'),
+(22, '19-06-2019 06:48:45pm', 'Bulanan', '19062019233'),
+(23, '19-06-2019 07:13:10pm', 'Bulanan', '19062019101'),
+(24, '19-06-2019 07:29:25pm', 'Bulanan', '19062019119'),
+(25, '19-06-2019 08:19:09pm', 'Mingguan', '19062019629');
 
 -- --------------------------------------------------------
 
@@ -221,8 +250,12 @@ CREATE TABLE `inspeksi` (
 --
 
 INSERT INTO `inspeksi` (`no`, `id`, `tanggal`, `shift`, `id_checklist`, `uk_pihak`, `uk_lokasi`, `temuan`, `potensi_bahaya`, `tindak_lanjut`, `batas_tindak_lanjut`, `bukti_tindak_lanjut`, `keterangan`, `status`) VALUES
-(2, '14062019177', '14/06/2019', '1', '["Memperbaiki peralatan dlm keadaan beroperasi","Area kerja yang kotor","Kurangnya pengawasan/kepemimpinan"]', 'PT Cipta Karya', 'Surabaya', '["Memperbaiki peralatan dlm keadaan beroperasi","Area kerja yang kotor","Kurangnya pengawasan/kepemimpinan"]', '["Potensi Bahaya","Bahay","Potensi Bahaya"]', '["Tindak Lanjut","Tindak Lanjut","tindak lanjut"]', '["2019-10-10","2019-10-10","2019-10-10"]', '', '', 0),
-(1, '14062019395', '14/06/2019', '1', '["Beroperasi/Bekerja Tanpa Otoritas","Memperbaiki peralatan dlm keadaan beroperasi","Area kerja yang kotor","Panas, getaran yang berlebihan"]', 'PT Gunadharma Perkasa', 'Welding', '["Beroperasi/Bekerja Tanpa Otoritas","Memperbaiki peralatan dlm keadaan beroperasi","Area kerja yang kotor","Panas, getaran yang berlebihan"]', '["Potensi Bahaya","Testing","Testing","Testing"]', '["Tindak Lanjut","Tindak Lanjut","Testing","Testing"]', '["2019-10-10","2019-10-10","2019-10-10","2019-10-10"]', '', '', 0);
+(2, '14062019177', '14/06/2019', '1', '["Memperbaiki peralatan dlm keadaan beroperasi","Area kerja yang kotor","Kurangnya pengawasan/kepemimpinan"]', 'PT Cipta Karya', 'Surabaya', '["Memperbaiki peralatan dlm keadaan beroperasi","Area kerja yang kotor","Kurangnya pengawasan/kepemimpinan"]', '["Potensi Bahaya","Bahay","Potensi Bahaya"]', '["Tindak Lanjut","Tindak Lanjut","tindak lanjut"]', '["2019-10-10","2019-10-10","2019-10-10"]', '', '', 1),
+(1, '14062019395', '14/06/2019', '1', '["Beroperasi/Bekerja Tanpa Otoritas","Memperbaiki peralatan dlm keadaan beroperasi","Area kerja yang kotor","Panas, getaran yang berlebihan"]', 'PT Gunadharma Perkasa', 'Welding', '["Beroperasi/Bekerja Tanpa Otoritas","Memperbaiki peralatan dlm keadaan beroperasi","Area kerja yang kotor","Panas, getaran yang berlebihan"]', '["Potensi Bahaya","Testing","Testing","Testing"]', '["Tindak Lanjut","Tindak Lanjut","Testing","Testing"]', '["2019-10-10","2019-10-10","2019-10-10","2019-10-10"]', '1', '', 0),
+(3, '14062019679', '14/06/2019', '1', '["Beroperasi/Bekerja Tanpa Otoritas","Memperbaiki peralatan dlm keadaan beroperasi","Area kerja yang kotor","Pelindung/Pembatas tidak ada/layak","Kurangnya pengawasan/kepemimpinan"]', 'PT Pertamina Tbk.', 'Surabaya', '["Beroperasi/Bekerja Tanpa Otoritas","Memperbaiki peralatan dlm keadaan beroperasi","Area kerja yang kotor","Pelindung/Pembatas tidak ada/layak","Kurangnya pengawasan/kepemimpinan"]', '["","","","",""]', '["","","","",""]', '["","","","",""]', '', '', 0),
+(5, '19062019101', '19/06/2019', '1', '["Beroperasi/Bekerja Tanpa Otoritas","Area kerja yang kotor","Kurangnya pengawasan/kepemimpinan"]', 'PT Terusan Jaya Abadi', 'Surabaya', '["Beroperasi/Bekerja Tanpa Otoritas","Area kerja yang kotor","Kurangnya pengawasan/kepemimpinan"]', '["tes","",""]', '["","",""]', '["","",""]', '["upload/Screenshot from 2019-06-11 10-47-19.png","upload/Screenshot from 2019-05-22 07-04-29.png","upload/Screenshot from 2019-05-22 15-59-22.png"]', '', 0),
+(6, '19062019266', '19/06/2019', '1', '["Beroperasi/Bekerja Tanpa Otoritas","Area kerja yang kotor","Kurangnya pengawasan/kepemimpinan"]', 'PT Gunadharma Perkasa', 'Pengelasan', '["Beroperasi/Bekerja Tanpa Otoritas","Area kerja yang kotor","Kurangnya pengawasan/kepemimpinan"]', '["Potensi Bahaya","Jatuh","Sakit"]', '["Tindak Lanjut","Terperanjak","diobati"]', '["2019-06-19","2019-06-19","2019-06-27"]', '["upload/Screenshot from 2019-05-28 21-52-34.png","upload/Screenshot from 2019-05-16 00-23-23.png","upload/Screenshot from 2019-05-28 21-51-20.png"]', '', 1),
+(4, '19062019594', '19/06/2019', '1', '["Beroperasi/Bekerja Tanpa Otoritas","Memperbaiki peralatan dlm keadaan beroperasi","Alat pelindung mesin yang terbuka","Kurangnya pengawasan/kepemimpinan"]', 'PT Antiaka Mandiri', 'Surabaya', '[null,null,null,null]', '[null,null,null,null]', '[null,null,null,null]', '[null,null,null,null]', '', '', 0);
 
 -- --------------------------------------------------------
 
@@ -278,7 +311,8 @@ CREATE TABLE `mingguan` (
 --
 
 INSERT INTO `mingguan` (`no`, `Id`, `jenis_pekerjaan`, `no_pekerjaan`, `minggu_ke`, `tahun_ke`, `progress_pekerjaan`, `masa_kerja_mulai`, `masa_kerja_akhir`, `hari_kerja_bulan_ini`, `jumlah_jam_kerja`, `total_har_kerja_berlangsung`, `total_jam_kerja`, `data_man_power_induk`, `data_man_power_outsource`, `temuan_unsafe_action`, `close_unsafe_action`, `total_unsafe_action`, `temuan_unsafe_condition`, `colse_unsafe_condition`, `total_unsafe_condition`, `nearmiss_jumlah`, `nearmiss_total`, `p3_jumlah`, `p3_total`, `ringan_jumlah`, `ringan_total`, `berat_jumlah`, `berat_total`, `fatality_jumlah`, `fatality_total`, `kerusakan_aset_jumlah`, `kerusakan_aset_total`, `kebakaran_jumlah`, `kebakaran_total`, `kerusakan_property`, `hilang_hari_kerja`, `biaya_pengobatan`, `keterangan`, `pt`) VALUES
-(4, '13062019598', 'Pengelasan', '412200012', '1', '2019', '', '2019-01-01', '2019-01-08', '26', 5, '20', '100', '10', '10', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '', '', '', 'Keterangan', 'PT Gunadharma Perkasa');
+(4, '13062019598', 'Pengelasan', '412200012', '1', '2019', '', '2019-01-01', '2019-01-08', '26', 5, '20', '100', '10', '10', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '', '', '', 'Keterangan', 'PT Gunadharma Perkasa'),
+(5, '19062019629', '1', '1', '1', '1', '', '0001-01-01', '0001-01-01', '1', 1, '10', '1', '10', '11', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '1');
 
 -- --------------------------------------------------------
 
@@ -382,6 +416,12 @@ ALTER TABLE `bulanan`
   ADD UNIQUE KEY `No` (`no`);
 
 --
+-- Indexes for table `closing_inspeksi`
+--
+ALTER TABLE `closing_inspeksi`
+  ADD PRIMARY KEY (`no`);
+
+--
 -- Indexes for table `harian`
 --
 ALTER TABLE `harian`
@@ -443,11 +483,16 @@ ALTER TABLE `aktivitas`
 -- AUTO_INCREMENT for table `aktivitas_bulanan`
 --
 ALTER TABLE `aktivitas_bulanan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `bulanan`
 --
 ALTER TABLE `bulanan`
+  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `closing_inspeksi`
+--
+ALTER TABLE `closing_inspeksi`
   MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `harian`
@@ -458,17 +503,17 @@ ALTER TABLE `harian`
 -- AUTO_INCREMENT for table `history`
 --
 ALTER TABLE `history`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT for table `inspeksi`
 --
 ALTER TABLE `inspeksi`
-  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `mingguan`
 --
 ALTER TABLE `mingguan`
-  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `user`
 --

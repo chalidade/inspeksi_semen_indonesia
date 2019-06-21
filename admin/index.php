@@ -103,6 +103,15 @@
 						</div>
 						<div class="col-4">
 						  <div class="content" style="margin-top:30px;">
+						    <a href="data-inspeksi.php">
+
+						  		 <img class="content-image img-fluid d-block mx-auto" style="width:80%;" src="img/008-analytics.png" alt="">
+						    </a>
+						  </div>
+							<h3 class="content-title" style="font-size:11px;color:#000;text-align:center;margin-top:10px;">Data Closing</h3>
+						</div>
+						<div class="col-4">
+						  <div class="content" style="margin-top:30px;">
 						    <a href="../index.php">
 
 						  		 <img class="content-image img-fluid d-block mx-auto" style="width:80%;" src="img/041-employee-3.png" alt="">

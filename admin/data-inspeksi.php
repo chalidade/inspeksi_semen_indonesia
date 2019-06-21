@@ -19,21 +19,24 @@
           <div class="col-6">
             Nama Kontraktor
           </div>
-          <div class="col-4">
-            Tanggal
+          <div class="col-3">
+            Inspeksi
           </div>
-          <div class="col-2">
-            Status
+          <div class="col-3">
+            Closing
           </div>
         </div>
         <?php
           $no   = 1;
           $pt   = $_SESSION['nama'];
+          $jab  = $_SESSION['jabatan'];
           $tang = date('d/m/Y');
           if ($pt == "Admin") {
-                    $data = mysqli_query($connect, "SELECT * FROM `inspeksi` ORDER BY `no` DESC ");
+              $data = mysqli_query($connect, "SELECT * FROM `inspeksi` ORDER BY `no` DESC ");
           // $data = mysqli_query($connect, "SELECT * FROM `inspeksi` WHERE `tanggal` = '$tang' ORDER BY `no` DESC ");
-          } else {
+        } else if ($jab == "SO" OR $jab == "Kasi") {
+              $data = mysqli_query($connect, "SELECT * FROM `inspeksi` WHERE `tanggal` = '$tang' ORDER BY `no` DESC ");
+        } else {
           $data = mysqli_query($connect, "SELECT * FROM `inspeksi` WHERE `uk_pihak` = '$pt' ORDER BY `no` DESC ");
           }
           while ($row=mysqli_fetch_row($data))
@@ -110,12 +113,18 @@
                               <!-- Additional required wrapper -->
                               <div class="swiper-wrapper">
                                 <?php
+                                    $close    = mysqli_query($connect, "SELECT * FROM `closing_inspeksi` WHERE `id_inspeksi` = '$row[1]'");
+                                    while ($a = mysqli_fetch_row($close)) {
+                                           $closing      = json_decode($a[3]);
+                                           $status_close = $a[4];
+                                    }
                                     $temuan   = json_decode($inspeksi[7]);
                                     $potensi  = json_decode($inspeksi[8]);
                                     $tindakan = json_decode($inspeksi[9]);
                                     $batas    = json_decode($inspeksi[10]);
                                     $bukti    = json_decode($inspeksi[11]);
                                     $ket      = json_decode($inspeksi[12]);
+
                                     for ($i=0; $i < count($temuan); $i++) {
                                   ?>
 
@@ -164,9 +173,31 @@
                                       <td style="vertical-align:top;"><?php echo $batas[$i]; ?></td>
                                     </tr>
                                     <tr>
-                                      <td style="vertical-align:top;">Bukti Tindak Lanjut</td>
+                                      <td style="vertical-align:top;">Bukti Temuan</td>
                                       <td style="vertical-align:top;">:</td>
-                                      <td style="vertical-align:top;"><a href="proses/<?php echo $bukti[$i]; ?>">Lihat</a></td>
+                                      <td style="vertical-align:top;"><img src="proses/<?php echo $bukti[$i]; ?>" style="width:100%"></td>
+                                    </tr>
+                                  </table>
+                                  <hr>
+                                  <table style="width:100%">
+                                    <tr>
+                                      <td style="vertical-align:top;" width="38%">Bukti Closing</td>
+                                      <td style="vertical-align:top;" width="2%">:</td>
+                                      <td style="vertical-align:top;"><img src="proses/<?php echo $closing[$i]; ?>" style="width:100%"></td>
+                                    </tr>
+                                    <tr>
+                                      <td style="vertical-align:top;" width="38%">Status Closing</td>
+                                      <td style="vertical-align:top;" width="2%">:</td>
+                                      <td style="vertical-align:top;">
+                                      <?php
+                                      if ($status_close == 0) {
+                                        echo "Menunggu ACC SO";
+                                      } else if($status_close == 1) {
+                                        echo "Closing di ACC";
+                                      } else if($status_close == 2) {
+                                        echo "Closing di Tolak";
+                                      }
+                                      ?></td>
                                     </tr>
                                     <!-- <tr>
                                       <td style="vertical-align:top;">Keterangan </td>
@@ -187,6 +218,13 @@
                                   <a href="proses/inspeksi.php?page=tolak&id=<?php echo $inspeksi[1]; ?>" class="btn btn-danger" style="font-size:12px;width:100%;margin-top:10px">Tolak Laporan</a>
                                 </p>
                               </div>
+                            <?php } else if ($_SESSION['jabatan'] == "SO") { ?>
+                              <div class="col-md-12" style="margin-top:20px">
+                                <p style="color:red;font-size:12px">* Dengan klik ACC laporan, saya menyatakan bahwa laporan closing yang diterima sudah sesuai
+                                  <a href="proses/inspeksi.php?page=accclosing&id=<?php echo $inspeksi[1]; ?>" class="btn btn-primary" style="font-size:12px;width:100%">ACC Closing</a>
+                                  <a href="proses/inspeksi.php?page=tolakclosing&id=<?php echo $inspeksi[1]; ?>" class="btn btn-danger" style="font-size:12px;width:100%;margin-top:10px">Tolak Closing</a>
+                                </p>
+                              </div>
                             <?php } else {} ?>
                         </div>
                         </div>
@@ -195,15 +233,18 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-primary">Download</button>
+                    <?php
+                     if ($_SESSION['jabatan'] != "SO") {
+                     ?>
+                    <a href="closing.php?id=<?php echo $row[1]; ?>" class="btn btn-success">Form Closing</a>
+                  <?php } ?>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-4">
-            <?php echo $row[2]; ?>
-          </div>
-          <div class="col-2">
+          <div class="col-3">
+            <center>
             <?php
           if($row[13] == "0") { ?>
             <img src="img/clock.png" title="Menunggu ACC" alt="" style="width:15px;">
@@ -212,6 +253,24 @@
           <?php } else if ($row[13] == "2") { ?>
             <img src="img/cancel.png" title="Ditolak" alt="" style="width:15px;">
           <?php }?>
+        </center>
+          </div>
+          <div class="col-3">
+            <center>
+            <?php
+            $close1    = mysqli_query($connect, "SELECT * FROM `closing_inspeksi` WHERE `id_inspeksi` = '$row[1]'");
+            while ($b = mysqli_fetch_row($close1)) {
+                $status_close1 = $b[4];
+            if ($status_close1 == 0) {
+              echo "<img src='img/clock.png' title='Menunggu ACC' style='width:15px;'>";
+            } else if($status_close1 == 1) {
+              echo "<img src='img/check.png' title='ACC' style='width:15px;'>";
+            } else if($status_close1 == 2) {
+              echo "<img src='img/cancel.png' title='Ditolak' style='width:15px;'>";
+            }
+          }
+            ?>
+          </center>
           </div>
         </div>
       </form>

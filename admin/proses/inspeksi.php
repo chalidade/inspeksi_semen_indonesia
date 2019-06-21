@@ -179,6 +179,14 @@ echo "<script>window.location = '../temuan.php';</script>";
   $id     = $_REQUEST['id'];
   $status = mysqli_query($connect, "UPDATE `inspeksi` SET `status` = '1' WHERE `inspeksi`.`id` = '$id';");
   echo "<script>window.location = '../data-inspeksi.php?id=inspeksi';</script>";
+} else if($page == 'accclosing') {
+  $id     = $_REQUEST['id'];
+  $status = mysqli_query($connect, "UPDATE `closing_inspeksi` SET `status` = '1' WHERE `closing_inspeksi`.`id_inspeksi` = '$id';");
+  echo "<script>window.location = '../data-inspeksi.php?id=inspeksi';</script>";
+} else if($page == 'tolakclosing') {
+  $id     = $_REQUEST['id'];
+  $status = mysqli_query($connect, "UPDATE `closing_inspeksi` SET `status` = '2' WHERE `closing_inspeksi`.`id_inspeksi` = '$id';");
+  echo "<script>window.location = '../data-inspeksi.php?id=inspeksi';</script>";
 } else if($page == 'tolak') {
   $id     = $_REQUEST['id'];
   $status = mysqli_query($connect, "UPDATE `inspeksi` SET `status` = '2' WHERE `inspeksi`.`id` = '$id';");
@@ -187,6 +195,32 @@ echo "<script>window.location = '../temuan.php';</script>";
   $id     = $_REQUEST['id'];
   $status = mysqli_query($connect, "DELETE FROM `inspeksi` WHERE `inspeksi`.`id` = '$id'");
   echo "<script>window.location = '../data-inspeksi.php?id=harian';</script>";
+} else if($page == 'closing') {
+
+  $id_inspeksi = $_REQUEST['inspeksi'];
+  $tanggal     = date('d/m/Y');
+  $target_dir  = "upload/";
+  $foto        = $_FILES["file"]["name"];
+  for ($i=0; $i <= count($foto); $i++) {
+        $filea       = $_FILES["file"]["name"][$i];
+        $target_file = $target_dir . basename($filea);
+        $file[]      =  $target_file;
+        $tmp[]       =  $_FILES["file"]["tmp_name"][$i];
+      }
+
+        $temuan      = json_encode($file);
+
+  for ($i=0; $i < count($file); $i++) {
+    if (move_uploaded_file($tmp[$i], $file[$i])) {
+      // echo "The file ". basename( $tmp[$i]). " has been uploaded. <br>";
+    } else {
+      // echo "Sorry, there was an error uploading your file.";
+    }
+  }
+
+
+  $simpan      = mysqli_query($connect, "INSERT INTO `closing_inspeksi` (`no`, `id_inspeksi`, `tanggal`, `foto_closing`,`status`) VALUES (NULL, '$id_inspeksi', '$tanggal', '$temuan', '0');");
+  echo "<script>window.location = '../data-inspeksi.php';</script>";
 }
 
 
