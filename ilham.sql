@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 19, 2019 at 10:18 PM
+-- Generation Time: Jun 23, 2019 at 10:13 PM
 -- Server version: 5.7.26-0ubuntu0.16.04.1
 -- PHP Version: 7.0.33-6+ubuntu16.04.1+deb.sury.org+3
 
@@ -488,7 +488,7 @@ ALTER TABLE `aktivitas_bulanan`
 -- AUTO_INCREMENT for table `bulanan`
 --
 ALTER TABLE `bulanan`
-  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `closing_inspeksi`
 --

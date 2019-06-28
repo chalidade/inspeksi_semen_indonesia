@@ -64,6 +64,7 @@
                         $data1 = mysqli_query($connect, "SELECT * FROM `inspeksi` WHERE `id` = '$row[1]' ");
                         while ($inspeksi=mysqli_fetch_row($data1))
                           {
+                            $id_inspeksi = $inspeksi[1];
                          ?>
                         <tr>
                           <td style="width:30%">Id Inspeksi</td>
@@ -232,7 +233,7 @@
                     <?php } ?>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Download</button>
+                    <a href="preview_lap_harian.php?id=<?php echo $id_inspeksi; ?>" target="_blank" type="button" class="btn btn-primary">Download</a>
                     <?php
                      if ($_SESSION['jabatan'] != "SO") {
                      ?>
