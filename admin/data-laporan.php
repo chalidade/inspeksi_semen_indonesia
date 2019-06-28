@@ -42,6 +42,7 @@
             }
             while ($row=mysqli_fetch_row($data))
               {
+
            ?>
           <div class="row" style="font-size:12px;border:solid thin #d4d4d4;color:#000;margin-left:1px;margin-right:1px;">
             <div class="col-2" style="text-align:center">
@@ -66,6 +67,7 @@
                           $lap = mysqli_query($connect, "SELECT * FROM `harian` WHERE `id` = '$row[1]'");
                           while ($lapor=mysqli_fetch_row($lap))
                           {
+                            $id_harian = $lapor[1];
                          ?>
                         <tr>
                           <td width="35%" style="vertical-align:top;">Id Laporan</td>
@@ -242,7 +244,7 @@
                       </div>
                     </div>
                     <div class="modal-footer">
-                      <a href="" class="btn btn-success">Download</a>
+                      <a href="print-harian.php?id=<?php echo $id_harian; ?>" target="_blank" class="btn btn-success">Download</a>
                       <a href="proses/harian.php?page=delete&id=<?php echo $lapor[1]; ?>" class="btn btn-danger">Delete Laporan</a>
                     </div>
                   </div>
