@@ -17,7 +17,14 @@
   <body onload="window.print()" style="border:solid thin #000">
     <table width="100%" align="center" style="text-align:center; border:solid thin #000">
       <tr>
-        <td rowspan="2" width="20%"> <img src="img/logo.png" alt="" width="50%" style="padding:20px"> </td>
+        <td rowspan="2" width="20%">
+          <table width="100%">
+            <tr>
+              <td><img src="img/logo.png" alt="" width="100%" style="padding:20px;"></td>
+              <td><img src="img/k3.png" alt="" width="50%" style="padding:20px"></td>
+            </tr>
+          </table>
+        </td>
         <td style="padding-top:10px;font-weight:500;font-size:14px">SEKSI KESELAMATAN KERJA TUBAN</td>
         <td rowspan="2" width="20%"><img src="img/logo.png" alt="" width="50%" style="padding:20px"></td>
       </tr>
