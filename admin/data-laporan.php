@@ -287,9 +287,6 @@
           <?php } else if($id == "bulanan") { ?>
           <!-- Bulanan -->
             <?php $no = 1; ?>
-            <div class="col-1">
-              No
-            </div>
               <div class="col-4">
                 Id Laporan
               </div>
@@ -305,11 +302,9 @@
             $data = mysqli_query($connect, "SELECT * FROM `bulanan` ORDER BY `no` DESC");
             while ($row=mysqli_fetch_row($data))
               {
+                $id_bulanan = $row[1];
            ?>
           <div class="row" style="font-size:12px;border:solid thin #d4d4d4;color:#000;margin-left:1px;margin-right:1px;">
-            <div class="col-1" style="text-align:center">
-              <?php echo $no;$no++; ?>
-            </div>
             <div class="col-4">
               <font style="padding-left:10px;" data-toggle="modal" data-target="#nama<?php echo $row[0]; ?>"><?php echo $row[1]; ?></font>
               <!-- Modal -->
@@ -509,7 +504,7 @@
 
                     </div>
                     <div class="modal-footer">
-                      <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+                      <a href="print_bulanan.php?id=<?php echo $id_bulanan; ?>" target="_blank" class="btn btn-success">Download</a>
                     </div>
                   </div>
 
@@ -547,6 +542,7 @@
               $data = mysqli_query($connect, "SELECT * FROM `mingguan` ORDER BY `no` DESC ");
               while ($row=mysqli_fetch_row($data))
                 {
+                  $id_mingguan = $row[1];
              ?>
             <div class="row" style="font-size:12px;border:solid thin #d4d4d4;color:#000;margin-left:1px;margin-right:1px;">
               <div class="col-6">
@@ -720,7 +716,7 @@
 
                       </div>
                       <div class="modal-footer">
-                        <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+                        <a href="print_mingguan.php?id=<?php echo $id_mingguan; ?>" target="_blank" class="btn btn-success">Download</a>
                       </div>
                     </div>
 
@@ -957,7 +953,7 @@
                       </div>
                     </div>
                     <div class="modal-footer">
-                      <a href="" class="btn btn-success">Download</a>
+                      <a href="print-harian.php?id=<?php echo $lapor[1]; ?>" target="_blank" class="btn btn-success">Download</a>
                       <a href="proses/harian.php?page=delete&id=<?php echo $lapor[1]; ?>" class="btn btn-danger">Delete Laporan</a>
                     </div>
                   </div>
