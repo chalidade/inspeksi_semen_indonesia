@@ -31,10 +31,10 @@
           $pt   = $_SESSION['nama'];
           $jab  = $_SESSION['jabatan'];
           $tang = date('d/m/Y');
-          if ($pt == "Admin") {
+          if ($pt == "Admin" || $jab == "Manajer" || $jab == "SO") {
               $data = mysqli_query($connect, "SELECT * FROM `inspeksi` ORDER BY `no` DESC ");
           // $data = mysqli_query($connect, "SELECT * FROM `inspeksi` WHERE `tanggal` = '$tang' ORDER BY `no` DESC ");
-        } else if ($jab == "SO" OR $jab == "Kasi") {
+        } else if ($jab == "SO" || $jab == "Kasi") {
               $data = mysqli_query($connect, "SELECT * FROM `inspeksi` WHERE `tanggal` = '$tang' ORDER BY `no` DESC ");
         } else {
           $data = mysqli_query($connect, "SELECT * FROM `inspeksi` WHERE `uk_pihak` = '$pt' ORDER BY `no` DESC ");
@@ -217,6 +217,7 @@
                                 <p style="color:red;font-size:12px">* Dengan klik ACC laporan, saya menyatakan bahwa laporan yang diterima sudah sesuai
                                   <a href="proses/inspeksi.php?page=acc&id=<?php echo $inspeksi[1]; ?>" class="btn btn-primary" style="font-size:12px;width:100%">ACC Laporan</a>
                                   <a href="proses/inspeksi.php?page=tolak&id=<?php echo $inspeksi[1]; ?>" class="btn btn-danger" style="font-size:12px;width:100%;margin-top:10px">Tolak Laporan</a>
+                                  <a href="closing.php?id=<?php echo $row[1]; ?>" class="btn btn-success" style="font-size:12px;width:100%;margin-top:10px">Form Closing</a>
                                 </p>
                               </div>
                             <?php } else if ($_SESSION['jabatan'] == "SO") { ?>
@@ -224,6 +225,7 @@
                                 <p style="color:red;font-size:12px">* Dengan klik ACC laporan, saya menyatakan bahwa laporan closing yang diterima sudah sesuai
                                   <a href="proses/inspeksi.php?page=accclosing&id=<?php echo $inspeksi[1]; ?>" class="btn btn-primary" style="font-size:12px;width:100%">ACC Closing</a>
                                   <a href="proses/inspeksi.php?page=tolakclosing&id=<?php echo $inspeksi[1]; ?>" class="btn btn-danger" style="font-size:12px;width:100%;margin-top:10px">Tolak Closing</a>
+                                  <a href="closing.php?id=<?php echo $row[1]; ?>" class="btn btn-success" style="font-size:12px;width:100%;margin-top:10px">Form Closing</a>
                                 </p>
                               </div>
                             <?php } else {} ?>
@@ -233,12 +235,8 @@
                     <?php } ?>
                   </div>
                   <div class="modal-footer">
-                    <a href="preview_lap_harian.php?id=<?php echo $id_inspeksi; ?>" target="_blank" type="button" class="btn btn-primary">Download</a>
-                    <?php
-                     if ($_SESSION['jabatan'] != "SO") {
-                     ?>
-                    <a href="closing.php?id=<?php echo $row[1]; ?>" class="btn btn-success">Form Closing</a>
-                  <?php } ?>
+                    <a href="preview_lap_harian.php?id=<?php echo $id_inspeksi; ?>" target="_blank" type="button" class="btn btn-primary">Download Inspeksi</a>
+                    <a href="print_closing.php?id=<?php echo $id_inspeksi; ?>" target="_blank" type="button" class="btn btn-primary">Download Closing</a>
                   </div>
                 </div>
               </div>

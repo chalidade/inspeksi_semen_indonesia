@@ -193,7 +193,7 @@
 							</div>
 							<h3 class="content-title" style="font-size:11px;color:#000;text-align:center;margin-top:10px;">Logout</h3>
 						</div>
-					<?php } else if($_SESSION['jabatan'] == "Manager") { ?>
+					<?php } else if($_SESSION['jabatan'] == "Manajer") { ?>
 						<div class="col-4">
 						  <div class="content" style="margin-top:30px;">
 						    <a href="data-inspeksi.php">

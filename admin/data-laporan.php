@@ -15,12 +15,9 @@
         <hr>
         <div class="row" style="font-size:12px;background:#242424;padding:10px;color:#fff;margin-left:1px;margin-right:1px;">
           <?php
-          $id = $_REQUEST['id'];
-
-          if ($id == "harian") { ?>
-            <?php
+            $id = $_REQUEST['id'];
+            if ($id == "harian" || $id == '') {
             $no   = 1;
-            if ($id == 'harian') {
             ?>
               <div class="col-2">
                 No
@@ -34,12 +31,9 @@
               <div class="col-2">
                 Status
               </div>
-            <?php } ?>
           </div>
           <?php
-            if ($id == 'harian'  || $id == '') {
-              $data = mysqli_query($connect, "SELECT * FROM `harian` ORDER BY `harian`.`nomer` DESC ");
-            }
+            $data = mysqli_query($connect, "SELECT * FROM `harian` ORDER BY `harian`.`nomer` DESC ");
             while ($row=mysqli_fetch_row($data))
               {
 
@@ -63,7 +57,6 @@
                     <div class="modal-body">
                       <table width="100%">
                         <?php
-                        if ($id == 'harian' || $id == '') {
                           $lap = mysqli_query($connect, "SELECT * FROM `harian` WHERE `id` = '$row[1]'");
                           while ($lapor=mysqli_fetch_row($lap))
                           {
@@ -251,7 +244,7 @@
                 </div>
               </div>
               <?php
-            }}?>
+            }?>
             </div>
             <div class="col-4">
               <?php echo $row[2]; ?>
@@ -261,19 +254,13 @@
             <div class="col-2">
               <center>
                 <?php
-                if ($id == 'harian'  || $id == '') {
-                  $data = mysqli_query($connect, "SELECT * FROM `harian` ORDER BY `harian`.`nomer` DESC ");
-                  while ($row=mysqli_fetch_row($data))
-                  {
                 if($row[25] == "0") { ?>
                   <img src="img/clock.png" title="Menunggu ACC" alt="" style="width:15px;">
                 <?php } else if($row[25] == "1") { ?>
                   <img src="img/check.png" title="Di ACC" alt="" style="width:15px;">
                 <?php } else if ($row[25] == "2") { ?>
                   <img src="img/cancel.png" title="Ditolak" alt="" style="width:15px;">
-                <?php }}} else if($id == 'bulanan') {
-
-                } ?>
+                <?php } ?>
               </center>
             </div>
           </div>

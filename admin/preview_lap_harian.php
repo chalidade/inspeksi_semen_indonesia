@@ -381,6 +381,7 @@
         <th style="border: 1px solid black;">Potensi Bahaya</th>
         <th style="border: 1px solid black;" style="border: 1px solid black;">Tindak Lanjut</th>
         <th style="border: 1px solid black;">Deadline</th>
+        <th style="border: 1px solid black;">Foto</th>
       </tr>
 
       <?php
@@ -393,6 +394,7 @@
       <td style="border: 1px solid black;text-align:left;padding-left:10px"><?php echo $potensi[$i]; ?></td>
       <td style="border: 1px solid black;text-align:left;padding-left:10px"><?php echo $tindak[$i]; ?></td>
       <td style="border: 1px solid black;text-align:left;padding-left:10px"><?php echo $batas[$i];$no++; ?></td>
+      <td style="border: 1px solid black;text-align:left;padding-left:10px"><center><img src="proses/<?php echo $bukti[$i]; ?>" style="width:200px"><?php $no++; ?></center></td>
       </tr>
     <?php } ?>
     <?php } ?>
