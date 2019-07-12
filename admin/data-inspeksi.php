@@ -31,7 +31,7 @@
           $pt   = $_SESSION['nama'];
           $jab  = $_SESSION['jabatan'];
           $tang = date('d/m/Y');
-          if ($pt == "Admin" || $jab == "Manajer" || $jab == "SO") {
+          if ($pt == "Admin" || $jab == "Manajer" || $jab == "SO" || $jab == "Kontraktor" || $jab == "Kasi") {
               $data = mysqli_query($connect, "SELECT * FROM `inspeksi` ORDER BY `no` DESC ");
           // $data = mysqli_query($connect, "SELECT * FROM `inspeksi` WHERE `tanggal` = '$tang' ORDER BY `no` DESC ");
         } else if ($jab == "SO" || $jab == "Kasi") {
