@@ -27,7 +27,16 @@
           <div class="col-md-12">
             <div class="form-group">
               <label for="lokasi"  style="width:100%" style="font-weight:800">Kontraktor
-                <input required type="text" name="kontraktor" id="lokasi" value="" class="form-control">
+                <select class="form-control" name="kontraktor">
+                  <?php
+                    $a  = mysqli_query($connect, "SELECT * FROM kontraktor");
+                    while ($kontraktor = mysqli_fetch_array($a)) {
+                  ?>
+                  <option value="<?php echo $kontraktor['nama']; ?>"> <?php echo $kontraktor['nama']; ?></option>
+                  <?php
+                    }
+                   ?>
+                </select>
               </label>
             </div>
           </div>

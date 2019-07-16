@@ -11,11 +11,12 @@
           </div>
         </div>
         <hr>
+        <h4 style="margin-bottom:10px">Data User</h4>
         <div class="row" style="background:#242424;padding:10px;color:#fff;margin-left:1px;margin-right:1px;">
-          <div class="col-2">
+          <div class="col-1">
             No
           </div>
-          <div class="col-6">
+          <div class="col-7">
             Nama Petugas
           </div>
           <div class="col-4">
@@ -29,10 +30,10 @@
             {
          ?>
         <div class="row" style="border:solid thin #d4d4d4;color:#000;margin-left:1px;margin-right:1px;">
-          <div class="col-2" style="text-align:center">
+          <div class="col-1" style="text-align:center">
             <?php echo $no;$no++; ?>
           </div>
-          <div class="col-6">
+          <div class="col-7">
             <font style="padding-left:10px;" data-toggle="modal" data-target="#nama<?php echo $row[0]; ?>"><?php echo $row[1]; ?></font>
             <!-- Modal -->
             <div class="modal fade" id="nama<?php echo $row[0]; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -82,6 +83,13 @@
                             <div class="form-group">
                               <label for="lokasi"  style="width:100%">Jabatan
                                 <input type="text" name="jabatan" id="jabatan" value="<?php echo $row1[2]; ?>" class="form-control">
+                              </label>
+                            </div>
+                          </div>
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <label for="lokasi"  style="width:100%">PT
+                                <input type="text" name="pt" value="<?php echo $row1[5]; ?>" class="form-control">
                               </label>
                             </div>
                           </div>
@@ -158,6 +166,22 @@
                     </div>
                     <div class="col-md-12">
                       <div class="form-group">
+                        <label for="uk" style="width:100%">Kontraktor
+                          <select class="form-control" name="kontraktor">
+                            <?php
+                              $a  = mysqli_query($connect, "SELECT * FROM kontraktor");
+                              while ($kontraktor = mysqli_fetch_array($a)) {
+                            ?>
+                            <option value="<?php echo $kontraktor['nama']; ?>"> <?php echo $kontraktor['nama']; ?></option>
+                            <?php
+                              }
+                             ?>
+                          </select>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
                         <label for="pass"  style="width:100%">Password
                           <input type="password" name="pass" id="pass" value="" class="form-control">
                         </label>
@@ -176,8 +200,73 @@
 
             </div>
           </div>
-          <a href="index.php" type="button" style="width:100%;margin-top:10px;" name="button" class="btn btn-danger"> Kembali </a>
+          <hr>
+          <h4 style="margin-bottom:10px">Data Kontraktors</h4>
+          <div class="row" style="background:#242424;padding:10px;color:#fff;margin-left:1px;margin-right:1px;">
+            <div class="col-2">
+              No
+            </div>
+            <div class="col-10">
+              Nama Kontraktor
+            </div>
+          </div>
+          <?php
+          $no   = 1;
+          $a    = mysqli_query($connect, "SELECT * FROM `kontraktor`");
+          while ($kontraktor = mysqli_fetch_array($a)) {
+          ?>
+          <div class="row" style="border:solid thin #d4d4d4;color:#000;margin-left:1px;margin-right:1px;">
+            <div class="col-1" style="text-align:center">
+              <?php echo $no;$no++; ?>
+            </div>
+            <div class="col-10">
+              <font style="padding-left:10px;"><?php echo $kontraktor['nama']; ?></font>
+          </div>
         </div>
+          <?php
+          }
+           ?>
+
+           <div id="kontraktor" class="modal fade" role="dialog">
+             <div class="modal-dialog">
+
+               <!-- Modal content-->
+               <div class="modal-content">
+                 <div class="modal-header">
+                   <h4 class="modal-title" id="exampleModalLabel"></h4>
+                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                   </button>
+                 </div>
+                 <div class="modal-body">
+                   <h4 style="text-align:center">Tambah Kontraktor</h4>
+                   <br>
+                   <form class="" action="proses/user.php?id=kontraktor" method="post">
+                   <div class="row">
+                     <div class="col-md-12">
+                       <div class="form-group">
+                         <label for="uk" style="width:100%">Nama
+                           <input type="text" name="nama" id="nama" value="" class="form-control">
+                         </label>
+                       </div>
+                     </div>
+                     <div class="col-md-12">
+                       <div class="form-group">
+                           <input type="submit" value="Simpan" class="btn btn-success" style="width:100%">
+                       </div>
+                     </div>
+                   </form>
+                 </div>
+                 <div class="modal-footer">
+                   <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                 </div>
+               </div>
+
+             </div>
+           </div>
+         </div>
+          <a style="width:100%;margin-top:20px;color:#fff" name="button" class="btn btn-primary" data-toggle="modal" data-target="#kontraktor"> Tambah Kontraktor </a>
+          <a href="index.php" type="button" style="width:100%;margin-top:10px;" name="button" class="btn btn-danger"> Kembali </a>
       </div>
 
       </div>

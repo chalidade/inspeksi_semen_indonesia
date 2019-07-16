@@ -18,8 +18,16 @@
           <div class="col-md-12">
             <div class="form-group">
               <label for="uk" style="width:100%">Kontraktor
-                <input disabled type="text" value="<?php echo $_SESSION['nama']; ?>" class="form-control">
-                <input required type="hidden" name="pt" value="<?php echo $_SESSION['nama']; ?>" class="form-control">
+                <select class="form-control" name="pt">
+                  <?php
+                    $a  = mysqli_query($connect, "SELECT * FROM kontraktor");
+                    while ($kontraktor = mysqli_fetch_array($a)) {
+                  ?>
+                  <option value="<?php echo $kontraktor['nama']; ?>"> <?php echo $kontraktor['nama']; ?></option>
+                  <?php
+                    }
+                   ?>
+                </select>
               </label>
             </div>
           </div>

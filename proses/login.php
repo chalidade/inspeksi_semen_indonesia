@@ -16,6 +16,7 @@ if (mysqli_num_rows($result) != 0)
     $_SESSION['nama']   = $row[1];
     $_SESSION['email']  = $row[3];
     $_SESSION['jabatan']= $row[2];
+    $_SESSION['pt']     = $row[5];
     }
 
     echo "<script>window.location = '../admin/index.php';</script>";

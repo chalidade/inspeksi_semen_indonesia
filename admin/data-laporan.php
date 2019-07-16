@@ -1,4 +1,9 @@
-<?php include "header.php"; ?>
+<?php
+session_start();
+$pt   = $_SESSION['pt'];
+$jab  = $_SESSION['jabatan'];
+include "header.php";
+?>
 
 
     <!-- Start service Area -->
@@ -33,7 +38,11 @@
               </div>
           </div>
           <?php
+            if ($jab == "Kontraktor") {
+            $data = mysqli_query($connect, "SELECT * FROM `harian` WHERE `pt` = '$pt' ");
+            } else {
             $data = mysqli_query($connect, "SELECT * FROM `harian` ORDER BY `harian`.`nomer` DESC ");
+            }
             while ($row=mysqli_fetch_row($data))
               {
 
@@ -286,7 +295,11 @@
           </div>
           <?php
             $no   = 1;
-            $data = mysqli_query($connect, "SELECT * FROM `bulanan` ORDER BY `no` DESC");
+            if ($jab == "Kontraktor") {
+              $data = mysqli_query($connect, "SELECT * FROM `bulanan` WHERE `kontraktor` = '$pt'");
+            } else {
+              $data = mysqli_query($connect, "SELECT * FROM `bulanan` ORDER BY `no` DESC");
+            }
             while ($row=mysqli_fetch_row($data))
               {
                 $id_bulanan = $row[1];
@@ -526,7 +539,11 @@
             </div>
           </div>
             <?php
+            if ($jab == "Kontraktor") {
+              $data = mysqli_query($connect, "SELECT * FROM `mingguan` WHERE `pt` = '$pt'");
+            } else {
               $data = mysqli_query($connect, "SELECT * FROM `mingguan` ORDER BY `no` DESC ");
+            }
               while ($row=mysqli_fetch_row($data))
                 {
                   $id_mingguan = $row[1];

@@ -28,15 +28,15 @@
         </div>
         <?php
           $no   = 1;
-          $pt   = $_SESSION['nama'];
+          $pt   = $_SESSION['pt'];
           $jab  = $_SESSION['jabatan'];
           $tang = date('d/m/Y');
-          if ($pt == "Admin" || $jab == "Manajer" || $jab == "SO" || $jab == "Kontraktor" || $jab == "Kasi") {
+          if ($jab == "Admin" || $jab == "Manajer" || $jab == "SO" || $jab == "Kasi") {
               $data = mysqli_query($connect, "SELECT * FROM `inspeksi` ORDER BY `no` DESC ");
           // $data = mysqli_query($connect, "SELECT * FROM `inspeksi` WHERE `tanggal` = '$tang' ORDER BY `no` DESC ");
         } else if ($jab == "SO" || $jab == "Kasi") {
               $data = mysqli_query($connect, "SELECT * FROM `inspeksi` WHERE `tanggal` = '$tang' ORDER BY `no` DESC ");
-        } else {
+        } else if($jab == "Kontraktor") {
           $data = mysqli_query($connect, "SELECT * FROM `inspeksi` WHERE `uk_pihak` = '$pt' ORDER BY `no` DESC ");
           }
           while ($row=mysqli_fetch_row($data))
@@ -47,9 +47,9 @@
             <?php echo $no;$no++; ?>
           </div> -->
           <div class="col-6">
-            <ANY style="padding-left:10px;" data-toggle="modal" data-target="#nama<?php echo $row[0]; ?>"><?php echo $row[5]; ?></ANY>
+            <ANY style="padding-left:10px;" data-toggle="modal" data-target="#pt<?php echo $row[0]; ?>"><?php echo $row[5]; ?></ANY>
             <!-- Modal -->
-            <div class="modal fade" id="nama<?php echo $row[0]; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="pt<?php echo $row[0]; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -225,6 +225,11 @@
                                 <p style="color:red;font-size:12px">* Dengan klik ACC laporan, saya menyatakan bahwa laporan closing yang diterima sudah sesuai
                                   <a href="proses/inspeksi.php?page=accclosing&id=<?php echo $inspeksi[1]; ?>" class="btn btn-primary" style="font-size:12px;width:100%">ACC Closing</a>
                                   <a href="proses/inspeksi.php?page=tolakclosing&id=<?php echo $inspeksi[1]; ?>" class="btn btn-danger" style="font-size:12px;width:100%;margin-top:10px">Tolak Closing</a>
+                                  <a href="closing.php?id=<?php echo $row[1]; ?>" class="btn btn-success" style="font-size:12px;width:100%;margin-top:10px">Form Closing</a>
+                                </p>
+                              </div>
+                            <?php } else if ($_SESSION['jabatan'] == "Kontraktor" ) { ?>
+                              <div class="col-md-12" style="margin-top:20px">
                                   <a href="closing.php?id=<?php echo $row[1]; ?>" class="btn btn-success" style="font-size:12px;width:100%;margin-top:10px">Form Closing</a>
                                 </p>
                               </div>
