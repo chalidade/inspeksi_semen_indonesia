@@ -16,7 +16,7 @@
           <div class="col-1">
             No
           </div>
-          <div class="col-7">
+          <div class="col-6">
             Nama Petugas
           </div>
           <div class="col-4">
@@ -33,7 +33,7 @@
           <div class="col-1" style="text-align:center">
             <?php echo $no;$no++; ?>
           </div>
-          <div class="col-7">
+          <div class="col-6">
             <font style="padding-left:10px;" data-toggle="modal" data-target="#nama<?php echo $row[0]; ?>"><?php echo $row[1]; ?></font>
             <!-- Modal -->
             <div class="modal fade" id="nama<?php echo $row[0]; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
